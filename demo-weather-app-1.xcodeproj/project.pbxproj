@@ -13,6 +13,8 @@
 		6F09BD5D269D8AB000C4F619 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F09BD5B269D8AB000C4F619 /* Main.storyboard */; };
 		6F09BD5F269D8AB100C4F619 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F09BD5E269D8AB100C4F619 /* Assets.xcassets */; };
 		6F09BD62269D8AB100C4F619 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F09BD60269D8AB100C4F619 /* LaunchScreen.storyboard */; };
+		6F09BD73269DA74500C4F619 /* ApiCallingStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F09BD72269DA74500C4F619 /* ApiCallingStruct.swift */; };
+		6F09BD76269DAF9600C4F619 /* JsonDataAsStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F09BD75269DAF9600C4F619 /* JsonDataAsStruct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		6F09BD5E269D8AB100C4F619 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F09BD61269D8AB100C4F619 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F09BD63269D8AB100C4F619 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F09BD72269DA74500C4F619 /* ApiCallingStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCallingStruct.swift; sourceTree = "<group>"; };
+		6F09BD75269DAF9600C4F619 /* JsonDataAsStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDataAsStruct.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +60,49 @@
 		6F09BD54269D8AB000C4F619 /* demo-weather-app-1 */ = {
 			isa = PBXGroup;
 			children = (
-				6F09BD55269D8AB000C4F619 /* AppDelegate.swift */,
-				6F09BD57269D8AB000C4F619 /* SceneDelegate.swift */,
-				6F09BD59269D8AB000C4F619 /* ViewController.swift */,
-				6F09BD5B269D8AB000C4F619 /* Main.storyboard */,
-				6F09BD5E269D8AB100C4F619 /* Assets.xcassets */,
-				6F09BD60269D8AB100C4F619 /* LaunchScreen.storyboard */,
+				6F09BD70269D97C000C4F619 /* Model */,
+				6F09BD6A269D8ABE00C4F619 /* Supporting files */,
+				6F09BD6C269D8ACE00C4F619 /* Controller */,
+				6F09BD6E269D8ADC00C4F619 /* View */,
 				6F09BD63269D8AB100C4F619 /* Info.plist */,
 			);
 			path = "demo-weather-app-1";
+			sourceTree = "<group>";
+		};
+		6F09BD6A269D8ABE00C4F619 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				6F09BD60269D8AB100C4F619 /* LaunchScreen.storyboard */,
+				6F09BD5E269D8AB100C4F619 /* Assets.xcassets */,
+				6F09BD55269D8AB000C4F619 /* AppDelegate.swift */,
+				6F09BD57269D8AB000C4F619 /* SceneDelegate.swift */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		6F09BD6C269D8ACE00C4F619 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6F09BD59269D8AB000C4F619 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6F09BD6E269D8ADC00C4F619 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6F09BD5B269D8AB000C4F619 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6F09BD70269D97C000C4F619 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6F09BD72269DA74500C4F619 /* ApiCallingStruct.swift */,
+				6F09BD75269DAF9600C4F619 /* JsonDataAsStruct.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +177,9 @@
 			files = (
 				6F09BD5A269D8AB000C4F619 /* ViewController.swift in Sources */,
 				6F09BD56269D8AB000C4F619 /* AppDelegate.swift in Sources */,
+				6F09BD73269DA74500C4F619 /* ApiCallingStruct.swift in Sources */,
 				6F09BD58269D8AB000C4F619 /* SceneDelegate.swift in Sources */,
+				6F09BD76269DAF9600C4F619 /* JsonDataAsStruct.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
