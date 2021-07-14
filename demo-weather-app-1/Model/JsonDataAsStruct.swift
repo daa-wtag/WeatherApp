@@ -8,7 +8,9 @@
 import Foundation
 struct JsonDataAsStruct:Codable{
     let main:Main
+    struct Main:Codable{
+        let temp:Double
+    }
+    let name:String
 }
-struct Main:Codable{
-    let temp:Double
-}
+

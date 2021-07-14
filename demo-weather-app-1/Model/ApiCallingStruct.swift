@@ -7,16 +7,28 @@
 
 import Foundation
 import CoreLocation
+
+protocol ApiCallingStructDelegate {
+    func updateUI(_ apiCallingStruct:ApiCallingStruct,temp:Double,cityName:String)
+}
+
 struct ApiCallingStruct {
     
-    var getFixUrl:String{
-        return "https://api.openweathermap.org/data/2.5/weather?appid=daf82517e9e888a45db619caeab87202"
-    }
+    private let getFixUrl1 = "https://api.openweathermap.org/data/2.5/weather?appid=daf82517e9e888a45db619caeab87202&units=metric"
+    private let getFixUrl2 = "https://api.openweathermap.org/data/2.5/onecall?appid=daf82517e9e888a45db619caeab87202&units=metric&exclude=minutely,hourly,current"
     
-    func callApi(latitude:CLLocationDegrees,longitude:CLLocationDegrees){
+    var delegate:ApiCallingStructDelegate?
+    
+    func callApi(latitude:CLLocationDegrees,longitude:CLLocationDegrees,isWeeklyForcast:Bool = false){
         print(#function)
-        var urlString = "\(getFixUrl)&lat=\(latitude)&lon=\(longitude)&units=metric"
-        print(urlString)
+        let urlString:String
+        let commonUrl:String = "&lat=\(latitude)&lon=\(longitude)"
+        if isWeeklyForcast{
+            urlString = getFixUrl2 + commonUrl
+        }else{
+            urlString = getFixUrl1 + commonUrl
+        }
+        //print(urlString)
         if let url = URL(string: urlString){
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
@@ -27,8 +39,20 @@ struct ApiCallingStruct {
                 
                 if let data = data{
                     do{
-                     let decodedData = try JSONDecoder().decode(JsonDataAsStruct.self, from: data)
-                        print("temp is \(decodedData.main.temp)")
+                        if isWeeklyForcast{
+                            let decodedData = try JSONDecoder().decode(WeeklyJsonDataAsStruct.self, from: data)
+                            var cnt = 0
+                            for daily in decodedData.daily{
+                                cnt = cnt + 1
+                                print(cnt)
+                                print(daily.dt)
+                                print(daily.temp)
+                                print("_______")
+                            }
+                        }else{
+                            let decodedData = try JSONDecoder().decode(JsonDataAsStruct.self, from: data)
+                            self.delegate?.updateUI(self, temp: decodedData.main.temp, cityName: decodedData.name)
+                        }
                     }catch{
                         print("we got error while decoding Json to struct \(error)")
                     }

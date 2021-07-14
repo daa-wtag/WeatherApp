@@ -12,6 +12,12 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
+    
+    
+    @IBAction func weeklyButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "weeklySeg", sender: self)
+    }
+    
     var locationManager = CLLocationManager()
     var apiCallingObj = ApiCallingStruct()
     
@@ -21,16 +27,19 @@ class ViewController: UIViewController {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.requestLocation()
+            apiCallingObj.delegate = self
         }
     }
 
-
 }
 
+//MARK:- CLLocationManagerDelegate
 extension ViewController:CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print(#function)
         if let location = locations.last{
+            manager.stopUpdatingLocation()
+            print(location)
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
             print(lat)
@@ -45,3 +54,12 @@ extension ViewController:CLLocationManagerDelegate{
     }
 }
 
+//MARK:- ApiCallingStructDelegate
+extension ViewController:ApiCallingStructDelegate{
+    func updateUI(_ apiCallingStruct: ApiCallingStruct, temp: Double, cityName: String) {
+        DispatchQueue.main.async {
+            self.temperatureLabel.text = String(format: "%.1f", temp)
+            self.cityLabel.text = cityName
+        }
+    }
+}

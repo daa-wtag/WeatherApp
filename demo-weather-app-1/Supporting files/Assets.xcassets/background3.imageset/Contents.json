@@ -1,0 +1,32 @@
+{
+  "images" : [
+    {
+      "filename" : "Fir Snow Winter Sky Background.jpeg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "light"
+        }
+      ],
+      "filename" : "Fir Snow Winter Sky Background-1.jpeg",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "🔥 Nature Abstract Super Amoled Wallpaper Full HD (2) _ Image free download (1).jpeg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
