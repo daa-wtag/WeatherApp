@@ -9,7 +9,18 @@ import Foundation
 import CoreLocation
 
 protocol ApiCallingStructDelegate {
-    func updateUI(_ apiCallingStruct:ApiCallingStruct,temp:Double,cityName:String)
+    func updateUI(_ apiCallingStruct:ApiCallingStruct,jsonDataAsStruct:JsonDataAsStruct)
+    func updateUI(_ apiCallingStruct:ApiCallingStruct,weeklyJsonDataAsStruct:WeeklyJsonDataAsStruct)
+}
+
+extension ApiCallingStructDelegate{
+    func updateUI(_ apiCallingStruct:ApiCallingStruct,jsonDataAsStruct:JsonDataAsStruct){
+        
+    }
+    
+    func updateUI(_ apiCallingStruct:ApiCallingStruct,weeklyJsonDataAsStruct:WeeklyJsonDataAsStruct){
+        
+    }
 }
 
 struct ApiCallingStruct {
@@ -28,7 +39,7 @@ struct ApiCallingStruct {
         }else{
             urlString = getFixUrl1 + commonUrl
         }
-        //print(urlString)
+        print(urlString)
         if let url = URL(string: urlString){
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
@@ -41,17 +52,10 @@ struct ApiCallingStruct {
                     do{
                         if isWeeklyForcast{
                             let decodedData = try JSONDecoder().decode(WeeklyJsonDataAsStruct.self, from: data)
-                            var cnt = 0
-                            for daily in decodedData.daily{
-                                cnt = cnt + 1
-                                print(cnt)
-                                print(daily.dt)
-                                print(daily.temp)
-                                print("_______")
-                            }
+                            self.delegate?.updateUI(self, weeklyJsonDataAsStruct: decodedData)
                         }else{
                             let decodedData = try JSONDecoder().decode(JsonDataAsStruct.self, from: data)
-                            self.delegate?.updateUI(self, temp: decodedData.main.temp, cityName: decodedData.name)
+                            self.delegate?.updateUI(self, jsonDataAsStruct: decodedData)
                         }
                     }catch{
                         print("we got error while decoding Json to struct \(error)")

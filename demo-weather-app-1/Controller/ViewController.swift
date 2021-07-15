@@ -24,11 +24,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.requestWhenInUseAuthorization() // accessing privacy
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.requestLocation()
-            apiCallingObj.delegate = self
-        }
+        locationManager.delegate = self
+        locationManager.requestLocation()
+        apiCallingObj.delegate = self
     }
 
 }
@@ -56,10 +54,10 @@ extension ViewController:CLLocationManagerDelegate{
 
 //MARK:- ApiCallingStructDelegate
 extension ViewController:ApiCallingStructDelegate{
-    func updateUI(_ apiCallingStruct: ApiCallingStruct, temp: Double, cityName: String) {
+    func updateUI(_ apiCallingStruct: ApiCallingStruct,jsonDataAsStruct:JsonDataAsStruct) {
         DispatchQueue.main.async {
-            self.temperatureLabel.text = String(format: "%.1f", temp)
-            self.cityLabel.text = cityName
+            self.temperatureLabel.text = String(format: "%.1f", jsonDataAsStruct.main.temp)
+            self.cityLabel.text = jsonDataAsStruct.name
         }
     }
 }
