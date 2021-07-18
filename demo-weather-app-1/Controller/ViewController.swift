@@ -7,7 +7,7 @@
 
 import UIKit
 import CoreLocation
-
+// test
 class ViewController: UIViewController {
 
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     
     @IBAction func weeklyButtonPressed(_ sender: UIButton) {
         performSegue(withIdentifier: "weeklySeg", sender: self)
+        print("test")
     }
     
     var locationManager = CLLocationManager()
