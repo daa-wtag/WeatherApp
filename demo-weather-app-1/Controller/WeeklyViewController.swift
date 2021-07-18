@@ -76,10 +76,11 @@ extension WeeklyViewController:ApiCallingStructDelegate{
                     self.dateLabels[i-1].text = "Tomorrow"
                 }else{
                     self.dateLabels[i-1].text = self.getDate(from: weeklyJsonDataAsStruct.daily[i].dt)
-                    self.dateLabels[i-1].font.withSize(20)
+//                    self.dateLabels[i-1].font = self.dateLabels[i-1].font.withSize(25.0)
                 }
                 
-                self.tempLabels[i-1].text = String(format:"%.1f",weeklyJsonDataAsStruct.daily[i].temp.max)
+                self.tempLabels[i-1].text = String(format:"%.1f",weeklyJsonDataAsStruct.daily[i].temp.max) + "°C"
+                self.tempLabels[i-1].font = self.tempLabels[i-1].font.withSize(25.0)
             }
         }
     }
