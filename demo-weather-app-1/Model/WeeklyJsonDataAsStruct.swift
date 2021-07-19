@@ -21,3 +21,4 @@ struct WeeklyJsonDataAsStruct:Codable {
         }
     }
 }
+
