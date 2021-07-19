@@ -11,6 +11,12 @@ struct JsonDataAsStruct:Codable{
     struct Main:Codable{
         let temp:Double
     }
+
+    let weather:[Weather]
+    struct Weather:Codable {
+        let icon:String
+    }
+    
     let name:String
 }
 

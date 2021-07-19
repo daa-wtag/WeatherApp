@@ -12,11 +12,12 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var imgView: UIImageView!
     
     
     @IBAction func weeklyButtonPressed(_ sender: UIButton) {
         performSegue(withIdentifier: "weeklySeg", sender: self)
-        print("test")
+        //print("test")
     }
     
     var locationManager = CLLocationManager()
@@ -59,6 +60,12 @@ extension ViewController:ApiCallingStructDelegate{
         DispatchQueue.main.async {
             self.temperatureLabel.text = String(format: "%.1f", jsonDataAsStruct.main.temp)
             self.cityLabel.text = jsonDataAsStruct.name
+        
+            if let lastWeather = jsonDataAsStruct.weather.last{
+//                print("https://openweathermap.org/img/wn/\(lastWeather.icon)@2x.png")
+                self.imgView.downloaded(from: "https://openweathermap.org/img/wn/\(lastWeather.icon)@2x.png")
+            }
         }
+        
     }
 }

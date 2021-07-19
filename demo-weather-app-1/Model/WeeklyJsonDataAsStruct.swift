@@ -14,5 +14,10 @@ struct WeeklyJsonDataAsStruct:Codable {
         struct Temp:Codable{
             let max:Double
         }
+        
+        let weather:[Weather]
+        struct Weather:Codable {
+            let icon:String
+        }
     }
 }

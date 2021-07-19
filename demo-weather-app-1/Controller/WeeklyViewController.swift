@@ -12,6 +12,7 @@ class WeeklyViewController: UIViewController {
   
     @IBOutlet var dateLabels: [UILabel]!
     @IBOutlet var tempLabels: [UILabel]!
+   // @IBOutlet var imageLabels: [UIImageView]!
     
     var locationManager = CLLocationManager()
     var apiCallingStruct = ApiCallingStruct()
@@ -81,6 +82,8 @@ extension WeeklyViewController:ApiCallingStructDelegate{
                 
                 self.tempLabels[i-1].text = String(format:"%.1f",weeklyJsonDataAsStruct.daily[i].temp.max) + "°C"
                 self.tempLabels[i-1].font = self.tempLabels[i-1].font.withSize(25.0)
+                //self.imageLabels[i-1].downloaded(from:"https://openweathermap.org/img/wn/10d@2x.png")
+                //self.imageLabels[i-1].removeFromSuperview()
             }
         }
     }
