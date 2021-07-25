@@ -10,18 +10,12 @@ import CoreLocation
 
 protocol ApiCallingStructDelegate {
     func updateUI(_ apiCallingStruct:ApiCallingStruct,jsonDataAsStruct:JsonDataAsStruct)
-    func updateUI(_ apiCallingStruct:ApiCallingStruct,weeklyJsonDataAsStruct:WeeklyJsonDataAsStruct)
 }
 
-extension ApiCallingStructDelegate{
-    func updateUI(_ apiCallingStruct:ApiCallingStruct,jsonDataAsStruct:JsonDataAsStruct){
-        
-    }
-    
-    func updateUI(_ apiCallingStruct:ApiCallingStruct,weeklyJsonDataAsStruct:WeeklyJsonDataAsStruct){
-        
-    }
+protocol ApiCallingStructDelegateWeekly{
+    func passWeeklyJsonDataAsStruct(weeklyData:WeeklyJsonDataAsStruct)
 }
+
 
 struct ApiCallingStruct {
     
@@ -29,6 +23,8 @@ struct ApiCallingStruct {
     private let getFixUrl2 = "https://api.openweathermap.org/data/2.5/onecall?appid=daf82517e9e888a45db619caeab87202&units=metric&exclude=minutely,hourly,current"
     
     var delegate:ApiCallingStructDelegate?
+    var anotherDelegate:ApiCallingStructDelegateWeekly?
+    
     
     func callApi(latitude:CLLocationDegrees,longitude:CLLocationDegrees,isWeeklyForcast:Bool = false){
         print(#function)
@@ -52,7 +48,7 @@ struct ApiCallingStruct {
                     do{
                         if isWeeklyForcast{
                             let decodedData = try JSONDecoder().decode(WeeklyJsonDataAsStruct.self, from: data)
-                            self.delegate?.updateUI(self, weeklyJsonDataAsStruct: decodedData)
+                            self.anotherDelegate?.passWeeklyJsonDataAsStruct(weeklyData: decodedData)
                         }else{
                             let decodedData = try JSONDecoder().decode(JsonDataAsStruct.self, from: data)
                             self.delegate?.updateUI(self, jsonDataAsStruct: decodedData)

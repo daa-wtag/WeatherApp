@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func weeklyButtonPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "weeklySeg", sender: self)
+        performSegue(withIdentifier: "weeklySeg2", sender: self)
         //print("test")
     }
     

@@ -10,10 +10,9 @@ import CoreLocation
 
 class WeeklyViewController: UIViewController {
   
-    @IBOutlet var dateLabels: [UILabel]!
-    @IBOutlet var tempLabels: [UILabel]!
-    @IBOutlet var imageLabels: [UIImageView]!
+    @IBOutlet weak var tableView: UITableView!
     
+    var weeklyJsonDataAsStruct:WeeklyJsonDataAsStruct?
     var locationManager = CLLocationManager()
     var apiCallingStruct = ApiCallingStruct()
     var didFindLocation:Bool?
@@ -23,9 +22,10 @@ class WeeklyViewController: UIViewController {
         print("\(#function) in weekly viewCOntroller")
         super.viewDidLoad()
         locationManager.delegate = self
-        apiCallingStruct.delegate = self
         didFindLocation = false
         locationManager.requestLocation()
+        tableView.dataSource = self
+        apiCallingStruct.anotherDelegate = self
     }
 }
 
@@ -51,42 +51,31 @@ extension WeeklyViewController:CLLocationManagerDelegate{
     }
 }
 
-//MARK:- Necessary functions
-extension WeeklyViewController{
-    func getDate(from dt:Double) -> String {
-        let date = NSDate(timeIntervalSince1970: dt) // 1626328800
-        //Date formatting
-        let dayTimePeriodFormatter = DateFormatter()
-        //dayTimePeriodFormatter.dateFormat = "dd/M/YYYY" // 15/7/2021
-        dayTimePeriodFormatter.dateFormat = "dd MMM" // 15 Jul
-        let dateString = dayTimePeriodFormatter.string(from: date as Date)
-        return dateString
+
+//MARK:- ApiCallingStructDelegate
+extension WeeklyViewController:ApiCallingStructDelegateWeekly{
+    func passWeeklyJsonDataAsStruct(weeklyData: WeeklyJsonDataAsStruct) {
+        self.weeklyJsonDataAsStruct = weeklyData
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
 
-//MARK:- ApiCallingStructDelegate
-extension WeeklyViewController:ApiCallingStructDelegate{
-    func updateUI(_ apiCallingStruct:ApiCallingStruct,weeklyJsonDataAsStruct:WeeklyJsonDataAsStruct){
-        for i in weeklyJsonDataAsStruct.daily.indices{
-            if i == 0{
-                continue
-            }
+//MARK:- TableViewDataSource
+extension WeeklyViewController:UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let count = ( weeklyJsonDataAsStruct?.daily.count ?? 1 ) - 1
+        return count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "weatherViewCell",for: indexPath) as! WeatherViewCell
         
-            DispatchQueue.main.async {
-                if i == 1{
-                    self.dateLabels[i-1].text = "Tomorrow"
-                }else{
-                    self.dateLabels[i-1].text = self.getDate(from: weeklyJsonDataAsStruct.daily[i].dt)
-//                    self.dateLabels[i-1].font = self.dateLabels[i-1].font.withSize(25.0)
-                }
-                
-                self.tempLabels[i-1].text = String(format:"%.1f",weeklyJsonDataAsStruct.daily[i].temp.max) + "°C"
-                self.tempLabels[i-1].font = self.tempLabels[i-1].font.withSize(20.0)
-                if let lastWeather = weeklyJsonDataAsStruct.daily[i].weather.last{
-                    self.imageLabels[i-1].downloaded(from:"https://openweathermap.org/img/wn/\(lastWeather.icon)@2x.png")
-                }
-                //self.imageLabels[i-1].removeFromSuperview()
-            }
+        if let dailyWeather = weeklyJsonDataAsStruct?.daily[indexPath.row + 1]{
+            cell.updateCell(dailyWeather:dailyWeather , dayOfTheWeek: indexPath.row + 1)
         }
+        
+        return cell
     }
 }
