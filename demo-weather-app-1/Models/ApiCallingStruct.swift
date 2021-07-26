@@ -9,33 +9,33 @@ import Foundation
 import CoreLocation
 
 protocol ApiCallingStructDelegate {
-    func updateUI(_ apiCallingStruct:ApiCallingStruct,jsonDataAsStruct:JsonDataAsStruct)
+    func updateUI(_ apiCallingStruct:ApiCallingStruct,todaysWeatherData:TodaysWeatherData)
 }
 
 protocol ApiCallingStructDelegateWeekly{
-    func passWeeklyJsonDataAsStruct(weeklyData:WeeklyJsonDataAsStruct)
+    func passWeeklyJsonDataAsStruct(weeklyWeatherData:WeeklyWeatherData)
 }
 
 
 struct ApiCallingStruct {
     
-    private let getFixUrl1 = "https://api.openweathermap.org/data/2.5/weather?appid=daf82517e9e888a45db619caeab87202&units=metric"
-    private let getFixUrl2 = "https://api.openweathermap.org/data/2.5/onecall?appid=daf82517e9e888a45db619caeab87202&units=metric&exclude=minutely,hourly,current"
+    private let currentWeatherPath = "\(Constants.openWeatherApiBaseUrl)/weather?units=metric&appid=\(Constants.API_KEY)"
+    private let weeklyWeatherPath = "\(Constants.openWeatherApiBaseUrl)/onecall?units=metric&exclude=minutely,hourly,current&appid=\(Constants.API_KEY)"
     
-    var delegate:ApiCallingStructDelegate?
-    var anotherDelegate:ApiCallingStructDelegateWeekly?
+    var currentWeatherDelegate:ApiCallingStructDelegate?
+    var weeklyWeatherDelegate:ApiCallingStructDelegateWeekly?
     
     
     func callApi(latitude:CLLocationDegrees,longitude:CLLocationDegrees,isWeeklyForcast:Bool = false){
-        print(#function)
         let urlString:String
-        let commonUrl:String = "&lat=\(latitude)&lon=\(longitude)"
+        let latitudeLongitude:String = "&lat=\(latitude)&lon=\(longitude)"
         if isWeeklyForcast{
-            urlString = getFixUrl2 + commonUrl
+            urlString = weeklyWeatherPath + latitudeLongitude
         }else{
-            urlString = getFixUrl1 + commonUrl
+            urlString = currentWeatherPath + latitudeLongitude
         }
-        print(urlString)
+        
+       
         if let url = URL(string: urlString){
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
@@ -47,11 +47,11 @@ struct ApiCallingStruct {
                 if let data = data{
                     do{
                         if isWeeklyForcast{
-                            let decodedData = try JSONDecoder().decode(WeeklyJsonDataAsStruct.self, from: data)
-                            self.anotherDelegate?.passWeeklyJsonDataAsStruct(weeklyData: decodedData)
+                            let decodedData = try JSONDecoder().decode(WeeklyWeatherData.self, from: data)
+                            self.weeklyWeatherDelegate?.passWeeklyJsonDataAsStruct(weeklyWeatherData: decodedData)
                         }else{
-                            let decodedData = try JSONDecoder().decode(JsonDataAsStruct.self, from: data)
-                            self.delegate?.updateUI(self, jsonDataAsStruct: decodedData)
+                            let decodedData = try JSONDecoder().decode(TodaysWeatherData.self, from: data)
+                            self.currentWeatherDelegate?.updateUI(self, todaysWeatherData: decodedData)
                         }
                     }catch{
                         print("we got error while decoding Json to struct \(error)")

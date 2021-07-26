@@ -8,18 +8,15 @@
 import UIKit
 import CoreLocation
 
-class WeeklyViewController: UIViewController {
+class WeeklyWeatherViewController: UIViewController {
   
     @IBOutlet weak var tableView: UITableView!
-    
-    var weeklyJsonDataAsStruct:WeeklyJsonDataAsStruct?
+    var weeklyJsonDataAsStruct:WeeklyWeather?
     var locationManager = CLLocationManager()
     var apiCallingStruct = ApiCallingStruct()
     var didFindLocation:Bool?
     
-    
     override func viewDidLoad() {
-        print("\(#function) in weekly viewCOntroller")
         super.viewDidLoad()
         locationManager.delegate = self
         didFindLocation = false
@@ -30,14 +27,12 @@ class WeeklyViewController: UIViewController {
 }
 
 //MARK:- CLLocationManagerDelegate
-extension WeeklyViewController:CLLocationManagerDelegate{
+extension WeeklyWeatherViewController:CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("\(#function) in weekly viewCOntroller")
         manager.stopUpdatingLocation()
         if didFindLocation == false{
             didFindLocation = true
             if let location = locations.last{
-                print(location)
                 let lat = location.coordinate.latitude
                 let lon = location.coordinate.longitude
                 apiCallingStruct.callApi(latitude: lat, longitude: lon, isWeeklyForcast: true)
@@ -46,15 +41,13 @@ extension WeeklyViewController:CLLocationManagerDelegate{
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("\(#function) in weekly viewCOntroller")
-        print("We got an error while trying to get Weekly forecast")
     }
 }
 
 
 //MARK:- ApiCallingStructDelegate
-extension WeeklyViewController:ApiCallingStructDelegateWeekly{
-    func passWeeklyJsonDataAsStruct(weeklyData: WeeklyJsonDataAsStruct) {
+extension WeeklyWeatherViewController:ApiCallingStructDelegateWeekly{
+    func passWeeklyJsonDataAsStruct(weeklyData: WeeklyWeather) {
         self.weeklyJsonDataAsStruct = weeklyData
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -63,19 +56,19 @@ extension WeeklyViewController:ApiCallingStructDelegateWeekly{
 }
 
 //MARK:- TableViewDataSource
-extension WeeklyViewController:UITableViewDataSource{
+extension WeeklyWeatherViewController:UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = ( weeklyJsonDataAsStruct?.daily.count ?? 1 ) - 1
         return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "weatherViewCell",for: indexPath) as! WeatherViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.weatherCellIdentifier,for: indexPath) as! WeatherCell
         
         if let dailyWeather = weeklyJsonDataAsStruct?.daily[indexPath.row + 1]{
             cell.updateCell(dailyWeather:dailyWeather , dayOfTheWeek: indexPath.row + 1)
         }
-        
+        cell.backgroundColor = UIColor(named: Constants.appBackGroundColor)
         return cell
     }
 }

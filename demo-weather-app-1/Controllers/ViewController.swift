@@ -7,18 +7,12 @@
 
 import UIKit
 import CoreLocation
-// test
-class ViewController: UIViewController {
+class TodaysWeatherViewController: UIViewController {
 
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
-    @IBOutlet weak var imgView: UIImageView!
-    
-    
-    @IBAction func weeklyButtonPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "weeklySeg2", sender: self)
-        //print("test")
-    }
+    @IBOutlet weak var weatherImageView: UIImageView!
+
     
     var locationManager = CLLocationManager()
     var apiCallingObj = ApiCallingStruct()
@@ -30,11 +24,14 @@ class ViewController: UIViewController {
         locationManager.requestLocation()
         apiCallingObj.delegate = self
     }
-
+    
+    @IBAction func weeklyButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "weeklySeg2", sender: self)
+    }
 }
 
 //MARK:- CLLocationManagerDelegate
-extension ViewController:CLLocationManagerDelegate{
+extension TodaysWeatherViewController:CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print(#function)
         if let location = locations.last{
@@ -55,15 +52,14 @@ extension ViewController:CLLocationManagerDelegate{
 }
 
 //MARK:- ApiCallingStructDelegate
-extension ViewController:ApiCallingStructDelegate{
-    func updateUI(_ apiCallingStruct: ApiCallingStruct,jsonDataAsStruct:JsonDataAsStruct) {
+extension TodaysWeatherViewController:ApiCallingStructDelegate{
+    func updateUI(_ apiCallingStruct: ApiCallingStruct,jsonDataAsStruct:TodaysWeather) {
         DispatchQueue.main.async {
             self.temperatureLabel.text = String(format: "%.1f", jsonDataAsStruct.main.temp)
             self.cityLabel.text = jsonDataAsStruct.name
         
             if let lastWeather = jsonDataAsStruct.weather.last{
-//                print("https://openweathermap.org/img/wn/\(lastWeather.icon)@2x.png")
-                self.imgView.downloaded(from: "https://openweathermap.org/img/wn/\(lastWeather.icon)@2x.png")
+                self.weatherImageView.downloaded(from: "https://openweathermap.org/img/wn/\(lastWeather.icon)@2x.png")
             }
         }
         
