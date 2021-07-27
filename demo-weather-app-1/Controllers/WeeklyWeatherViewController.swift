@@ -22,6 +22,7 @@ class WeeklyWeatherViewController: UIViewController {
         super.viewDidLoad()
         didFindLocation = false
         tableView.dataSource = self
+        tableView.delegate = self
         apiCallingStruct.weeklyWeatherDelegate = self
         
         if let lat = latitude , let lon = longitude{
@@ -54,6 +55,23 @@ extension WeeklyWeatherViewController:UITableViewDataSource{
             cell.updateCell(dailyWeather: dailyWeather, dayOfTheWeek: indexPath.row + 1)
         }
         cell.backgroundColor = UIColor(named: Constants.appBackGroundColor)
+        
         return cell
+    }
+}
+
+
+extension WeeklyWeatherViewController:UITableViewDelegate{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+    let detailsOfDailyWeatherVC =  storyboard?.instantiateViewController(withIdentifier: Constants.detailsOfDailyWeatherIdentifier) as! DetailsOfDailyWeatherViewController
+      // passing data to next vc [S]
+        let weeklyWeatherDataDaily = weeklyWeatherData?.daily[indexPath.row + 1]
+        detailsOfDailyWeatherVC.dailyWeather = weeklyWeatherDataDaily
+        if let theDate = weeklyWeatherDataDaily?.dt{
+            detailsOfDailyWeatherVC.theDate = theDate.getDate(atDDMMMformat: true)
+        }
+     // passing data to next vc [E]
+        navigationController?.pushViewController(detailsOfDailyWeatherVC, animated: true)
     }
 }

@@ -34,8 +34,11 @@ class TodaysWeatherViewController: UIViewController {
         apiCallingStruct.currentWeatherDelegate = self
     }
 
-    @IBAction func weeklyButtonPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: Constants.weeklySegue, sender: self)
+    @IBAction func SevenDayForecastButtonPressed(_ sender: UIButton) {
+        let weeklyWeatherVC = storyboard?.instantiateViewController(withIdentifier:Constants.weeklyVcStoryBoardIdentifier) as! WeeklyWeatherViewController
+        weeklyWeatherVC.latitude = self.latitude // passing data to weekly vc
+        weeklyWeatherVC.longitude = self.longitude // passing data to weekly vc
+        navigationController?.pushViewController(weeklyWeatherVC, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,13 +50,7 @@ class TodaysWeatherViewController: UIViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.weeklySegue{
-            let weeklyWeatherVC = segue.destination as! WeeklyWeatherViewController
-            weeklyWeatherVC.latitude = self.latitude
-            weeklyWeatherVC.longitude = self.longitude
-        }
-    }
+    
 }
 
 //MARK:- CLLocationManagerDelegate

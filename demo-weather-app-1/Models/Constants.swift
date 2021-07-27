@@ -33,6 +33,8 @@ struct Constants{
     
     //MARK:- For Segue
     static let weeklySegue = "weeklySegue"
+    static let weeklyVcStoryBoardIdentifier = "weeklyVC"
+    static let detailsOfDailyWeatherIdentifier = "detailsOfDailyWeather"
     
     //MARK:- For weather cell
     static let weatherCellIdentifier = "weatherCell"
