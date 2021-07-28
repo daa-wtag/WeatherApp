@@ -6,13 +6,13 @@
 //
 
 import Foundation
-struct TodaysWeatherData:Codable{ // todays weather "json data as struct"
-    let main:MainWeather
-    let weather:[WeatherDescription]
-    let sys:SunriseSunsetdata
-    let name:String
-    let clouds:CloudPercentage
-    let wind:WindData
+struct TodaysWeatherData: Codable{ // todays weather "json data as struct"
+    let main: MainWeather
+    let weather: [WeatherDescription]
+    let sys: SunriseSunsetdata
+    let name: String
+    let clouds: CloudPercentage
+    let wind: WindData
 }
 
 

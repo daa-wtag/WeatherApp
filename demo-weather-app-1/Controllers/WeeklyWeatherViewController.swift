@@ -11,16 +11,13 @@ import CoreLocation
 class WeeklyWeatherViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    var weeklyWeatherData:WeeklyWeatherData?
+    var weeklyWeatherData: WeeklyWeatherData?
     var apiCallingStruct = ApiCallingStruct()
-    var didFindLocation:Bool?
-    
     var latitude: CLLocationDegrees?
     var longitude: CLLocationDegrees?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        didFindLocation = false
         tableView.dataSource = self
         tableView.delegate = self
         apiCallingStruct.weeklyWeatherDelegate = self
@@ -32,7 +29,7 @@ class WeeklyWeatherViewController: UIViewController {
 }
 
 //MARK:- ApiCallingStructDelegate
-extension WeeklyWeatherViewController:ApiCallingStructDelegateWeekly{
+extension WeeklyWeatherViewController: ApiCallingStructDelegateWeekly{
     func passWeeklyJsonDataAsStruct(weeklyWeatherData: WeeklyWeatherData) {
         self.weeklyWeatherData = weeklyWeatherData
         DispatchQueue.main.async {
@@ -42,7 +39,7 @@ extension WeeklyWeatherViewController:ApiCallingStructDelegateWeekly{
 }
 
 //MARK:- UITableViewDataSource
-extension WeeklyWeatherViewController:UITableViewDataSource{
+extension WeeklyWeatherViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = ( weeklyWeatherData?.daily.count ?? 1 ) - 1
         return count
@@ -61,7 +58,7 @@ extension WeeklyWeatherViewController:UITableViewDataSource{
 }
 
 
-extension WeeklyWeatherViewController:UITableViewDelegate{
+extension WeeklyWeatherViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
     let detailsOfDailyWeatherVC =  storyboard?.instantiateViewController(withIdentifier: Constants.detailsOfDailyWeatherIdentifier) as! DetailsOfDailyWeatherViewController

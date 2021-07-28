@@ -23,7 +23,8 @@ class DetailsOfDailyWeatherViewController: UIViewController {
     @IBOutlet weak var windSpeedLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
     var dailyWeather: DailyWeather?
-    var theDate:String?
+    var theDate: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         xDayDetailsLabel.text = theDate! + "'s Details"

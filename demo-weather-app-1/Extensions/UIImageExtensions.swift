@@ -7,7 +7,7 @@
 
 import UIKit
 extension UIImage {
-    func resize(_ width: CGFloat, _ height:CGFloat) -> UIImage? {
+    func resize(_ width: CGFloat, _ height: CGFloat) -> UIImage? {
         let widthRatio  = width / size.width
         let heightRatio = height / size.height
         let ratio = widthRatio > heightRatio ? heightRatio : widthRatio

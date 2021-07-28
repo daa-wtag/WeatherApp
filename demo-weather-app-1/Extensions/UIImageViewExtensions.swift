@@ -27,7 +27,4 @@ extension UIImageView {
         guard let url = URL(string: link) else { return }
         downloaded(from: url, contentMode: mode)
     }
-    
-    
-    
 }

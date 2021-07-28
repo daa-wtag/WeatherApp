@@ -7,7 +7,7 @@
 
 import UIKit
 extension UILabel{
-    func textResize(with size:CGFloat){
+    func textResize(with size: CGFloat){
         self.font = self.font.withSize(size)
     }
 }

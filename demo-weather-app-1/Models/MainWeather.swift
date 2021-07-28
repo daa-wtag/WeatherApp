@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct MainWeather:Codable{
-    let temp:Double
-    let humidity:Int
+struct MainWeather: Codable{
+    let temp: Double
+    let humidity: Int
 }

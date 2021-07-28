@@ -7,7 +7,7 @@
 
 import Foundation
 extension Double{
-    func getDate(atDDMMMformat:Bool) -> String {
+    func getDate(atDDMMMformat: Bool) -> String {
         let dt = self
         let date = NSDate(timeIntervalSince1970: dt) // Jul 27, 2021 at 6:43 PM for 1627389833
         //Date formatting

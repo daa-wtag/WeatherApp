@@ -8,7 +8,7 @@
 import Foundation
 struct Constants{
     
-    static func weatherIcon(temp:Double) -> String {
+    static func weatherIcon(temp: Double) -> String {
         let anotherTemp = ceil(temp)
         switch anotherTemp {
         case ...0:

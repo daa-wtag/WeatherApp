@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct DailyTemperature:Codable{
-    let max:Double
-    let min:Double
+struct DailyTemperature: Codable{
+    let max: Double
+    let min: Double
 }

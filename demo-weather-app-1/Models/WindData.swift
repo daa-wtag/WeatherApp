@@ -6,6 +6,6 @@
 //
 
 import Foundation
-struct WindData:Codable {
-    let speed:Double
+struct WindData: Codable {
+    let speed: Double
 }

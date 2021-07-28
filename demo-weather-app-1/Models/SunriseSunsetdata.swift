@@ -6,6 +6,6 @@
 //
 
 import Foundation
-struct SunriseSunsetdata:Codable {
-    let country:String
+struct SunriseSunsetdata: Codable {
+    let country: String
 }

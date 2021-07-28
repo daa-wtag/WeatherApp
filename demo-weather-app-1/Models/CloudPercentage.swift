@@ -6,6 +6,6 @@
 //
 
 import Foundation
-struct CloudPercentage:Codable{
-    let all:Int
+struct CloudPercentage: Codable{
+    let all: Int
 }

@@ -9,11 +9,11 @@ import Foundation
 import CoreLocation
 
 protocol ApiCallingStructDelegate {
-    func updateUI(_ apiCallingStruct:ApiCallingStruct,todaysWeatherData:TodaysWeatherData)
+    func updateUI(_ apiCallingStruct: ApiCallingStruct, todaysWeatherData: TodaysWeatherData)
 }
 
 protocol ApiCallingStructDelegateWeekly{
-    func passWeeklyJsonDataAsStruct(weeklyWeatherData:WeeklyWeatherData)
+    func passWeeklyJsonDataAsStruct(weeklyWeatherData: WeeklyWeatherData)
 }
 
 
@@ -22,11 +22,11 @@ struct ApiCallingStruct {
     private let currentWeatherPath = "\(Constants.openWeatherApiBaseUrl)/weather?units=metric&appid=\(Constants.API_KEY)"
     private let weeklyWeatherPath = "\(Constants.openWeatherApiBaseUrl)/onecall?units=metric&exclude=minutely,hourly,current&appid=\(Constants.API_KEY)"
     
-    var currentWeatherDelegate:ApiCallingStructDelegate?
-    var weeklyWeatherDelegate:ApiCallingStructDelegateWeekly?
+    var currentWeatherDelegate: ApiCallingStructDelegate?
+    var weeklyWeatherDelegate: ApiCallingStructDelegateWeekly?
     
     
-    func callApi(latitude:CLLocationDegrees,longitude:CLLocationDegrees,isWeeklyForcast:Bool = false){
+    func callApi(latitude: CLLocationDegrees, longitude: CLLocationDegrees, isWeeklyForcast: Bool = false){
         let urlString:String
         let latitudeLongitude:String = "&lat=\(latitude)&lon=\(longitude)"
         if isWeeklyForcast{
