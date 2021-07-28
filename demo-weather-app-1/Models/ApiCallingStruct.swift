@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 import CoreLocation
 
 protocol ApiCallingStructDelegate {
@@ -34,34 +35,27 @@ struct ApiCallingStruct {
         }else{
             urlString = currentWeatherPath + latitudeLongitude
         }
+   
+        let requestObject = AF.request(urlString)
         
-       
-        if let url = URL(string: urlString){
-            let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: url) { (data, response, error) in
-                if error != nil{
-                    print("we got an error while fetching data from internet. error is \n \(error!)")
-                    return
+        if isWeeklyForcast{
+            requestObject.responseDecodable(of:WeeklyWeatherData.self){ response in
+                switch response.result{
+                case .success(let decodedData):
+                    self.weeklyWeatherDelegate?.passWeeklyJsonDataAsStruct(weeklyWeatherData: decodedData)
+                case .failure(let error):
+                    print("we got an error \(error)")
                 }
-                
-                if let data = data{
-                    do{
-                        if isWeeklyForcast{
-                            let decodedData = try JSONDecoder().decode(WeeklyWeatherData.self, from: data)
-                            self.weeklyWeatherDelegate?.passWeeklyJsonDataAsStruct(weeklyWeatherData: decodedData)
-                        }else{
-                            let decodedData = try JSONDecoder().decode(TodaysWeatherData.self, from: data)
-                            self.currentWeatherDelegate?.updateUI(self, todaysWeatherData: decodedData)
-                        }
-                    }catch{
-                        print("we got error while decoding Json to struct \(error)")
-                    }
-                }
-                
             }
-            task.resume()
         }else{
-            print("Faild to create URL object")
+            requestObject.responseDecodable(of:TodaysWeatherData.self){ response in
+                switch response.result{
+                case .success(let decodedData):
+                    self.currentWeatherDelegate?.updateUI(self, todaysWeatherData: decodedData)
+                case .failure(let error):
+                    print("we got an error \(error)")
+                }
+            }
         }
         
     }
