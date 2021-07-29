@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct WeeklyWeatherData: Codable { // // 7 days weather "json data as struct"
+struct NextSevenDaysWeatherData: Codable { // // 7 days weather "json data as struct"
     let daily: [DailyWeather]
 }
 

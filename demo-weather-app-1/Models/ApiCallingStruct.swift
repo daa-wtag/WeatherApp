@@ -8,55 +8,76 @@
 import Foundation
 import Alamofire
 import CoreLocation
+import RealmSwift
 
 protocol ApiCallingStructDelegate {
-    func updateUI(_ apiCallingStruct: ApiCallingStruct, todaysWeatherData: TodaysWeatherData)
+    func updateUI(_ apiCallingStruct: ApiCallingStruct, weatherData: Codable)
 }
-
-protocol ApiCallingStructDelegateWeekly{
-    func passWeeklyJsonDataAsStruct(weeklyWeatherData: WeeklyWeatherData)
-}
-
 
 struct ApiCallingStruct {
-    
+    let localRealm = try! Realm()
     private let currentWeatherPath = "\(Constants.openWeatherApiBaseUrl)/weather?units=metric&appid=\(Constants.API_KEY)"
     private let weeklyWeatherPath = "\(Constants.openWeatherApiBaseUrl)/onecall?units=metric&exclude=minutely,hourly,current&appid=\(Constants.API_KEY)"
     
-    var currentWeatherDelegate: ApiCallingStructDelegate?
-    var weeklyWeatherDelegate: ApiCallingStructDelegateWeekly?
-    
+    var weatherDelegate: ApiCallingStructDelegate?
     
     func callApi(latitude: CLLocationDegrees, longitude: CLLocationDegrees, isWeeklyForcast: Bool = false){
-        let urlString:String
-        let latitudeLongitude:String = "&lat=\(latitude)&lon=\(longitude)"
+        let urlString: String
+        let latitudeLongitude: String = "&lat=\(latitude)&lon=\(longitude)"
         if isWeeklyForcast{
             urlString = weeklyWeatherPath + latitudeLongitude
         }else{
             urlString = currentWeatherPath + latitudeLongitude
         }
-   
-        let requestObject = AF.request(urlString)
         
-        if isWeeklyForcast{
-            requestObject.responseDecodable(of:WeeklyWeatherData.self){ response in
+        if Connectivity.isConnectedToInternet {
+            AF.request(urlString).response{ response in
                 switch response.result{
-                case .success(let decodedData):
-                    self.weeklyWeatherDelegate?.passWeeklyJsonDataAsStruct(weeklyWeatherData: decodedData)
+                case .success( _):
+                    if isWeeklyForcast{
+                        do{
+                            let decodedData = try JSONDecoder().decode(NextSevenDaysWeatherData.self, from: response.data!)
+                            
+                            self.weatherDelegate?.updateUI(self, weatherData: decodedData)
+                        }catch{
+                            print("got error: \(error)")
+                        }
+                        
+                    }else{
+                        do{
+                            let decodedData = try JSONDecoder().decode(TodaysWeatherData.self, from: response.data!)
+                            print(localRealm.configuration.fileURL!)
+                            createDataInRealm(todaysDecodedData: decodedData)
+                            self.weatherDelegate?.updateUI(self, weatherData: decodedData)
+                        }catch{
+                            print("got error: \(error)")
+                        }
+                    }
                 case .failure(let error):
                     print("we got an error \(error)")
                 }
             }
         }else{
-            requestObject.responseDecodable(of:TodaysWeatherData.self){ response in
-                switch response.result{
-                case .success(let decodedData):
-                    self.currentWeatherDelegate?.updateUI(self, todaysWeatherData: decodedData)
-                case .failure(let error):
-                    print("we got an error \(error)")
-                }
+            if isWeeklyForcast{
+             
+            }else{
+                let lastTask = localRealm.objects(RealmClassTodaysWeatherData.self).last
+//                let todaysWeatherData = TodaysWeatherData(main: MainWeather(temp: lastTask?.main?.temp, humidity: lastTask?.main?.humidity), weather: <#T##[WeatherDescription]#>, sys: <#T##SunriseSunsetdata#>, name: <#T##String#>, clouds: <#T##CloudPercentage#>, wind: <#T##WindData#>)
+                print(lastTask)
             }
+            print("offline")
         }
         
     }
+    
+    func createDataInRealm(todaysDecodedData:TodaysWeatherData){
+        let task = RealmClassTodaysWeatherData.createObject(with: todaysDecodedData)
+        try! localRealm.write {
+            localRealm.add(task)
+        }
+    }
+    
+//    func readDataFromRealm(){
+//
+//    }
 }

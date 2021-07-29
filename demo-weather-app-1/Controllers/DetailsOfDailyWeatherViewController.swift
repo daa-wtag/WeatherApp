@@ -39,7 +39,7 @@ class DetailsOfDailyWeatherViewController: UIViewController {
             moonRiseLabel.text = dailyWeather.moonrise.getDate(atDDMMMformat: false)
             moonSetLabel.text = dailyWeather.moonset.getDate(atDDMMMformat: false)
             if let lastWeather = dailyWeather.weather.last{
-                weatherDescriptionLabel.text = lastWeather.description
+                weatherDescriptionLabel.text = lastWeather.main
             }
             maxTempLabel.text = String(format:"%.1f",dailyWeather.temp.max) + "°C"
             minTempLabel.text = String(format:"%.1f",dailyWeather.temp.min) + "°C"

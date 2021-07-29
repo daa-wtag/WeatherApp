@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 class TodaysWeatherViewController: UIViewController {
-
+    
     @IBOutlet weak var cloudPercentageImageView: UIImageView!
     @IBOutlet weak var cloudPercentageLabel: UILabel!
     @IBOutlet weak var windSpeedImageView: UIImageView!
@@ -20,7 +20,7 @@ class TodaysWeatherViewController: UIViewController {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var weatherImageView: UIImageView!
-
+    
     var locationManager = CLLocationManager()
     var apiCallingStruct = ApiCallingStruct()
     var latitude: CLLocationDegrees?
@@ -31,11 +31,11 @@ class TodaysWeatherViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization() // accessing privacy
         locationManager.delegate = self
         locationManager.requestLocation()
-        apiCallingStruct.currentWeatherDelegate = self
+        apiCallingStruct.weatherDelegate = self
     }
-
+    
     @IBAction func SevenDayForecastButtonPressed(_ sender: UIButton) {
-        let weeklyWeatherVC = storyboard?.instantiateViewController(withIdentifier:Constants.weeklyVcStoryBoardIdentifier) as! WeeklyWeatherViewController
+        let weeklyWeatherVC = storyboard?.instantiateViewController(withIdentifier:Constants.weeklyVcStoryBoardIdentifier) as! NextSevenDaysWeatherViewController
         weeklyWeatherVC.latitude = self.latitude // passing data to weekly vc
         weeklyWeatherVC.longitude = self.longitude // passing data to weekly vc
         navigationController?.pushViewController(weeklyWeatherVC, animated: true)
@@ -45,7 +45,7 @@ class TodaysWeatherViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -67,25 +67,28 @@ extension TodaysWeatherViewController:CLLocationManagerDelegate{
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-
+        
     }
 }
 
 //MARK:- ApiCallingStructDelegate
 extension TodaysWeatherViewController:ApiCallingStructDelegate{
-    func updateUI(_ apiCallingStruct: ApiCallingStruct,todaysWeatherData:TodaysWeatherData) {
+    func updateUI(_ apiCallingStruct: ApiCallingStruct,weatherData:Codable) {
         DispatchQueue.main.async {
-            self.temperatureLabel.text = String(format: "%.1f", todaysWeatherData.main.temp)
-            self.cityLabel.text = todaysWeatherData.name + "," + todaysWeatherData.sys.country
-            self.weatherImageView.image = UIImage(systemName: Constants.weatherIcon(temp: todaysWeatherData.main.temp))
-            self.weatherDescriptionLabel.text = todaysWeatherData.weather.last?.main
-            
-            self.cloudPercentageImageView.image = UIImage(systemName: "cloud")
-            self.cloudPercentageLabel.text = String(todaysWeatherData.clouds.all) + "%"
-            self.windSpeedImageView.image = UIImage(systemName: "wind")
-            self.windSpeedLabel.text = String(todaysWeatherData.wind.speed) + "m/s"
-            self.humidityImageView.image = UIImage(named: "humidity")
-            self.humidityLabel.text = String(todaysWeatherData.main.humidity)+"%"
+            if let todaysWeatherData = weatherData as? TodaysWeatherData{
+                print("Updated UI in \(#file):\(#line)")
+                self.temperatureLabel.text = String(format: "%.1f", todaysWeatherData.main.temp)
+                self.cityLabel.text = todaysWeatherData.name + "," + todaysWeatherData.sys.country
+                self.weatherImageView.image = UIImage(systemName: Constants.weatherIcon(temp: todaysWeatherData.main.temp))
+                self.weatherDescriptionLabel.text = todaysWeatherData.weather.last?.main
+                
+                self.cloudPercentageImageView.image = UIImage(systemName: "cloud")
+                self.cloudPercentageLabel.text = String(todaysWeatherData.clouds.all) + "%"
+                self.windSpeedImageView.image = UIImage(systemName: "wind")
+                self.windSpeedLabel.text = String(todaysWeatherData.wind.speed) + "m/s"
+                self.humidityImageView.image = UIImage(named: "humidity")
+                self.humidityLabel.text = String(todaysWeatherData.main.humidity)+"%"
+            }
             
         }
         

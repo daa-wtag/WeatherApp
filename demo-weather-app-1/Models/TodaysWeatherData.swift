@@ -13,6 +13,10 @@ struct TodaysWeatherData: Codable{ // todays weather "json data as struct"
     let name: String
     let clouds: CloudPercentage
     let wind: WindData
+    
+    func createObject(with data:RealmClassTodaysWeatherData) {
+        
+    }
 }
 
 

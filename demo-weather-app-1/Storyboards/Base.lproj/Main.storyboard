@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FE2-jx-oIS">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -13,14 +12,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="TodaysWeatherViewController" customModule="demo_weather_app_1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background4" translatesAutoresizingMaskIntoConstraints="NO" id="EbF-hZ-ZtU">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Sxs-yS-bG4" userLabel="MainStack">
-                                <rect key="frame" x="118" y="267" width="178" height="362"/>
+                                <rect key="frame" x="211" y="119" width="178" height="362"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="gRW-ws-feg">
                                         <rect key="frame" x="12.5" y="0.0" width="153" height="101.5"/>
@@ -115,7 +114,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZNz-dT-bHT">
-                                <rect key="frame" x="53.5" y="175" width="307" height="35"/>
+                                <rect key="frame" x="146.5" y="27" width="307" height="35"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fia-ko-yJa" userLabel="cloud_p_imageview">
                                         <rect key="frame" x="0.0" y="0.0" width="30" height="35"/>
@@ -207,46 +206,46 @@
             </objects>
             <point key="canvasLocation" x="1076.8115942028987" y="97.767857142857139"/>
         </scene>
-        <!--Weekly Weather View Controller-->
+        <!--Next Seven Days Weather View Controller-->
         <scene sceneID="OF3-AB-BuR">
             <objects>
-                <viewController storyboardIdentifier="weeklyVC" id="YSe-is-KqA" customClass="WeeklyWeatherViewController" customModule="demo_weather_app_1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="weeklyVC" id="YSe-is-KqA" customClass="NextSevenDaysWeatherViewController" customModule="demo_weather_app_1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W53-bp-So5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hsW-bb-dY3">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" name="newBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="weatherCell" id="ZIx-MO-4PV" customClass="WeeklyWeatherCell" customModule="demo_weather_app_1" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="157"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="157.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZIx-MO-4PV" id="GLO-sh-bXu">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="157"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="157.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="KCm-ph-wHw">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="157"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="157.5"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="uKu-ZJ-CZ2">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="155"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="155.5"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L1W-Mc-aIk">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="207" height="155"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="155.5"/>
                                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </imageView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="QaF-xT-VgU">
-                                                                    <rect key="frame" x="207" y="0.0" width="207" height="155"/>
+                                                                    <rect key="frame" x="300" y="0.0" width="300" height="155.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GTC-UQ-U9c">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="207" height="77.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="300" height="78"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="temp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kma-u7-3b5">
-                                                                            <rect key="frame" x="0.0" y="77.5" width="207" height="77.5"/>
+                                                                            <rect key="frame" x="0.0" y="78" width="300" height="77.5"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -256,7 +255,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yiz-bX-cMZ" userLabel="divider">
-                                                            <rect key="frame" x="0.0" y="155" width="414" height="2"/>
+                                                            <rect key="frame" x="0.0" y="155.5" width="600" height="2"/>
                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="2" id="Mkr-Tl-rLx"/>
@@ -305,23 +304,23 @@
             <objects>
                 <viewController storyboardIdentifier="detailsOfDailyWeather" id="ral-qK-VIS" customClass="DetailsOfDailyWeatherViewController" customModule="demo_weather_app_1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r1P-6O-Wem">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="V3t-c8-LoB">
-                                <rect key="frame" x="10" y="266.5" width="394" height="363.5"/>
+                                <rect key="frame" x="10" y="118.5" width="580" height="363.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pj2-kX-X7x">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="149.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="580" height="149.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X day details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xMa-rn-x02">
-                                                <rect key="frame" x="120" y="0.0" width="154" height="33.5"/>
+                                                <rect key="frame" x="213" y="0.0" width="154" height="33.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7rI-lQ-YYh">
-                                                <rect key="frame" x="46" y="41.5" width="302" height="108"/>
+                                                <rect key="frame" x="139" y="41.5" width="302" height="108"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gmd-YD-grM">
                                                         <rect key="frame" x="0.0" y="0.0" width="302" height="50"/>
@@ -414,7 +413,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Hg1-oF-hKZ">
-                                        <rect key="frame" x="0.0" y="159.5" width="394" height="204"/>
+                                        <rect key="frame" x="0.0" y="159.5" width="580" height="204"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT CONDITIONS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fnx-5I-gmL">
                                                 <rect key="frame" x="0.0" y="0.0" width="234.5" height="26.5"/>
