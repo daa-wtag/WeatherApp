@@ -37,7 +37,6 @@ struct ApiCallingStruct {
                     if isWeeklyForcast{
                         do{
                             let decodedData = try JSONDecoder().decode(NextSevenDaysWeatherData.self, from: response.data!)
-                            
                             self.weatherDelegate?.updateUI(self, weatherData: decodedData)
                         }catch{
                             print("got error: \(error)")
@@ -59,11 +58,13 @@ struct ApiCallingStruct {
             }
         }else{
             if isWeeklyForcast{
-             
+                
             }else{
-                let lastTask = localRealm.objects(RealmClassTodaysWeatherData.self).last
-//                let todaysWeatherData = TodaysWeatherData(main: MainWeather(temp: lastTask?.main?.temp, humidity: lastTask?.main?.humidity), weather: <#T##[WeatherDescription]#>, sys: <#T##SunriseSunsetdata#>, name: <#T##String#>, clouds: <#T##CloudPercentage#>, wind: <#T##WindData#>)
-                print(lastTask)
+                if let lastTask = localRealm.objects(RealmClassTodaysWeatherData.self).last,
+                   let todaysWeatherData = createTodaysWeatherDataObject(with: lastTask) {
+                    self.weatherDelegate?.updateUI(self, weatherData: todaysWeatherData)
+                    print(lastTask)
+                }
             }
             print("offline")
         }
@@ -77,7 +78,29 @@ struct ApiCallingStruct {
         }
     }
     
-//    func readDataFromRealm(){
-//
-//    }
+    func createTodaysWeatherDataObject(with lastTask: RealmClassTodaysWeatherData)-> TodaysWeatherData?{
+        if let lastTaskMainTemp = lastTask.main?.temp ,
+           let lastTaskMainHumidity = lastTask.main?.humidity,
+           let lastTaskWeatherLastId = lastTask.weather.last?.id,
+           let lastTaskWeatherLastMain = lastTask.weather.last?.main,
+           let lastTaskWeatherLastIcon = lastTask.weather.last?.icon,
+           let lastTaskSysCountry = lastTask.sys?.country,
+           let lastTaskName = lastTask.name,
+           let lastTaskCloudsAll = lastTask.clouds?.all,
+           let lastTaskWindSpeed = lastTask.wind?.speed{
+            let todaysWeatherData = TodaysWeatherData(main: MainWeather(temp: lastTaskMainTemp, humidity: lastTaskMainHumidity),
+                                                      weather: [WeatherDescription(id: lastTaskWeatherLastId,
+                                                                                   main:lastTaskWeatherLastMain,
+                                                                                   icon: lastTaskWeatherLastIcon) ],
+                                                      sys: SunriseSunsetdata(country: lastTaskSysCountry),
+                                                      name: lastTaskName,
+                                                      clouds: CloudPercentage(all: lastTaskCloudsAll),
+                                                      wind: WindData(speed: lastTaskWindSpeed)
+            )
+            
+            return todaysWeatherData
+        }else{
+            return nil
+        }
+    }
 }
