@@ -15,6 +15,9 @@
 		6F09BD62269D8AB100C4F619 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F09BD60269D8AB100C4F619 /* LaunchScreen.storyboard */; };
 		6F09BD73269DA74500C4F619 /* ApiCallingStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F09BD72269DA74500C4F619 /* ApiCallingStruct.swift */; };
 		6F09BD76269DAF9600C4F619 /* TodaysWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F09BD75269DAF9600C4F619 /* TodaysWeatherData.swift */; };
+		6F1A1AF126B30CF90092EF2C /* RealmClassNextSevenDaysWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A1AF026B30CF90092EF2C /* RealmClassNextSevenDaysWeatherData.swift */; };
+		6F1A1AF426B30DB80092EF2C /* RealmClassDailyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A1AF326B30DB80092EF2C /* RealmClassDailyWeather.swift */; };
+		6F1A1AF726B30E920092EF2C /* RealmsClassDailyTemperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A1AF626B30E920092EF2C /* RealmsClassDailyTemperature.swift */; };
 		6F259FF7269F03B4000D5C33 /* NextSevenDaysWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F259FF6269F03B4000D5C33 /* NextSevenDaysWeatherData.swift */; };
 		6F3045AC26AEC84F00FED247 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3045AB26AEC84F00FED247 /* UIImageExtensions.swift */; };
 		6F3045AF26AED59200FED247 /* SunriseSunsetdata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3045AE26AED59200FED247 /* SunriseSunsetdata.swift */; };
@@ -51,6 +54,9 @@
 		6F09BD63269D8AB100C4F619 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F09BD72269DA74500C4F619 /* ApiCallingStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCallingStruct.swift; sourceTree = "<group>"; };
 		6F09BD75269DAF9600C4F619 /* TodaysWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysWeatherData.swift; sourceTree = "<group>"; };
+		6F1A1AF026B30CF90092EF2C /* RealmClassNextSevenDaysWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmClassNextSevenDaysWeatherData.swift; sourceTree = "<group>"; };
+		6F1A1AF326B30DB80092EF2C /* RealmClassDailyWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmClassDailyWeather.swift; sourceTree = "<group>"; };
+		6F1A1AF626B30E920092EF2C /* RealmsClassDailyTemperature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmsClassDailyTemperature.swift; sourceTree = "<group>"; };
 		6F259FF6269F03B4000D5C33 /* NextSevenDaysWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextSevenDaysWeatherData.swift; sourceTree = "<group>"; };
 		6F3045AB26AEC84F00FED247 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		6F3045AE26AED59200FED247 /* SunriseSunsetdata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunriseSunsetdata.swift; sourceTree = "<group>"; };
@@ -113,7 +119,6 @@
 		6F09BD54269D8AB000C4F619 /* demo-weather-app-1 */ = {
 			isa = PBXGroup;
 			children = (
-				6F39EFF726B26F5F00610733 /* RealmClasses */,
 				6F36BBD426AE88AD00826CB3 /* Extensions */,
 				6F36BBD326AE888A00826CB3 /* Resources */,
 				6F36BBD226AE882A00826CB3 /* Storyboards */,
@@ -159,6 +164,15 @@
 				6F3045B126AEE53100FED247 /* CloudPercentage.swift */,
 				6F3045B426AEE64F00FED247 /* WindData.swift */,
 				6F39EFF826B2705900610733 /* Connectivity.swift */,
+				6F39EFFB26B2725E00610733 /* RealmClassTodaysWeatherData.swift */,
+				6F39EFFE26B2738500610733 /* RealmClassMainWeather.swift */,
+				6F39F00126B2740100610733 /* RealmClassWeatherDescription.swift */,
+				6F39F00426B274BC00610733 /* RealmClassSunriseSunsetdata.swift */,
+				6F39F00726B277F100610733 /* RealmClassCloudPercentage.swift */,
+				6F39F00A26B2791C00610733 /* RealmClassWindData.swift */,
+				6F1A1AF026B30CF90092EF2C /* RealmClassNextSevenDaysWeatherData.swift */,
+				6F1A1AF326B30DB80092EF2C /* RealmClassDailyWeather.swift */,
+				6F1A1AF626B30E920092EF2C /* RealmsClassDailyTemperature.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -190,19 +204,6 @@
 				6F37666226B078E600C07E71 /* UILabel.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		6F39EFF726B26F5F00610733 /* RealmClasses */ = {
-			isa = PBXGroup;
-			children = (
-				6F39EFFB26B2725E00610733 /* RealmClassTodaysWeatherData.swift */,
-				6F39EFFE26B2738500610733 /* RealmClassMainWeather.swift */,
-				6F39F00126B2740100610733 /* RealmClassWeatherDescription.swift */,
-				6F39F00426B274BC00610733 /* RealmClassSunriseSunsetdata.swift */,
-				6F39F00726B277F100610733 /* RealmClassCloudPercentage.swift */,
-				6F39F00A26B2791C00610733 /* RealmClassWindData.swift */,
-			);
-			path = RealmClasses;
 			sourceTree = "<group>";
 		};
 		A42AE2139B5781730332DD17 /* Pods */ = {
@@ -321,6 +322,7 @@
 				6F09BD5A269D8AB000C4F619 /* TodaysWeatherViewController.swift in Sources */,
 				6F09BD56269D8AB000C4F619 /* AppDelegate.swift in Sources */,
 				6F259FF7269F03B4000D5C33 /* NextSevenDaysWeatherData.swift in Sources */,
+				6F1A1AF426B30DB80092EF2C /* RealmClassDailyWeather.swift in Sources */,
 				6F39F00826B277F100610733 /* RealmClassCloudPercentage.swift in Sources */,
 				6F36BBE326AE8FE800826CB3 /* WeatherDescription.swift in Sources */,
 				6F39F00526B274BC00610733 /* RealmClassSunriseSunsetdata.swift in Sources */,
@@ -328,6 +330,8 @@
 				6F3045B226AEE53100FED247 /* CloudPercentage.swift in Sources */,
 				6F09BD73269DA74500C4F619 /* ApiCallingStruct.swift in Sources */,
 				6F36BBE026AE8FAA00826CB3 /* MainWeather.swift in Sources */,
+				6F1A1AF726B30E920092EF2C /* RealmsClassDailyTemperature.swift in Sources */,
+				6F1A1AF126B30CF90092EF2C /* RealmClassNextSevenDaysWeatherData.swift in Sources */,
 				6F3045AF26AED59200FED247 /* SunriseSunsetdata.swift in Sources */,
 				6F30A6DE26A53CD800518524 /* UIImageViewExtensions.swift in Sources */,
 				6F39EFFF26B2738500610733 /* RealmClassMainWeather.swift in Sources */,

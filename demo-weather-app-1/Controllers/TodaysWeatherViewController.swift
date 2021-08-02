@@ -35,10 +35,10 @@ class TodaysWeatherViewController: UIViewController {
     }
     
     @IBAction func SevenDayForecastButtonPressed(_ sender: UIButton) {
-        let weeklyWeatherVC = storyboard?.instantiateViewController(withIdentifier:Constants.weeklyVcStoryBoardIdentifier) as! NextSevenDaysWeatherViewController
-        weeklyWeatherVC.latitude = self.latitude // passing data to weekly vc
-        weeklyWeatherVC.longitude = self.longitude // passing data to weekly vc
-        navigationController?.pushViewController(weeklyWeatherVC, animated: true)
+        let nextSevenDaysWeatherVC = storyboard?.instantiateViewController(withIdentifier:Constants.weeklyVcStoryBoardIdentifier) as! NextSevenDaysWeatherViewController
+        nextSevenDaysWeatherVC.latitude = self.latitude // passing data to weekly vc
+        nextSevenDaysWeatherVC.longitude = self.longitude // passing data to weekly vc
+        navigationController?.pushViewController(nextSevenDaysWeatherVC, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

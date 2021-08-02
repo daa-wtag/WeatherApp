@@ -11,7 +11,7 @@ import CoreLocation
 class NextSevenDaysWeatherViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    var weeklyWeatherData: NextSevenDaysWeatherData?
+    var nextSevenDaysWeatherData: NextSevenDaysWeatherData?
     var apiCallingStruct = ApiCallingStruct()
     var latitude: CLLocationDegrees?
     var longitude: CLLocationDegrees?
@@ -31,7 +31,7 @@ class NextSevenDaysWeatherViewController: UIViewController {
 //MARK:- ApiCallingStructDelegate
 extension NextSevenDaysWeatherViewController: ApiCallingStructDelegate{
     func updateUI(_ apiCallingStruct: ApiCallingStruct,weatherData:Codable) {
-        self.weeklyWeatherData = weatherData as? NextSevenDaysWeatherData
+        self.nextSevenDaysWeatherData = weatherData as? NextSevenDaysWeatherData
         print("Updated UI in \(#file):\(#line)")
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -42,14 +42,14 @@ extension NextSevenDaysWeatherViewController: ApiCallingStructDelegate{
 //MARK:- UITableViewDataSource
 extension NextSevenDaysWeatherViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = ( weeklyWeatherData?.daily.count ?? 1 ) - 1
+        let count = ( nextSevenDaysWeatherData?.daily.count ?? 1 ) - 1
         return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.weatherCellIdentifier, for: indexPath) as! WeeklyWeatherCell
         
-        if let dailyWeather = weeklyWeatherData?.daily[indexPath.row + 1]{
+        if let dailyWeather = nextSevenDaysWeatherData?.daily[indexPath.row + 1]{
             cell.updateCell(dailyWeather: dailyWeather, dayOfTheWeek: indexPath.row + 1)
         }
         cell.backgroundColor = UIColor(named: Constants.appBackGroundColor)
@@ -64,9 +64,9 @@ extension NextSevenDaysWeatherViewController: UITableViewDelegate{
         tableView.deselectRow(at: indexPath, animated: false)
     let detailsOfDailyWeatherVC =  storyboard?.instantiateViewController(withIdentifier: Constants.detailsOfDailyWeatherIdentifier) as! DetailsOfDailyWeatherViewController
       // passing data to next vc [S]
-        let weeklyWeatherDataDaily = weeklyWeatherData?.daily[indexPath.row + 1]
-        detailsOfDailyWeatherVC.dailyWeather = weeklyWeatherDataDaily
-        if let theDate = weeklyWeatherDataDaily?.dt{
+        let dailyWeather = nextSevenDaysWeatherData?.daily[indexPath.row + 1]
+        detailsOfDailyWeatherVC.dailyWeather = dailyWeather
+        if let theDate = dailyWeather?.dt{
             detailsOfDailyWeatherVC.theDate = theDate.getDate(atDDMMMformat: true)
         }
      // passing data to next vc [E]
