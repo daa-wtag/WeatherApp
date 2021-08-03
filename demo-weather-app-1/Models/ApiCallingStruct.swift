@@ -34,23 +34,13 @@ struct ApiCallingStruct {
                 switch response.result{
                 case .success( _):
                     if isWeeklyForcast{
-                        do{
-                            let nextSevenDaysWeatherData = try JSONDecoder().decode(NextSevenDaysWeatherData.self, from: response.data!)
-                            writeDataInRealm(nextSevenDaysWeatherData: nextSevenDaysWeatherData)
-                            self.weatherDelegate?.updateUI(self, weatherData: nextSevenDaysWeatherData)
-                        }catch{
-                            print("got error: \(error)")
-                        }
-                        
+                        let nextSevenDaysWeatherData = fetchNextSevenDaysWeatherData(from: response.data)
+                        writeDataInRealm(nextSevenDaysWeatherData: nextSevenDaysWeatherData)
+                        self.weatherDelegate?.updateUI(self, weatherData: nextSevenDaysWeatherData)
                     }else{
-                        do{
-                            let todaysWeatherData = try JSONDecoder().decode(TodaysWeatherData.self, from: response.data!)
-                            //print(localRealm.configuration.fileURL!)
-                            writeDataInRealm(todaysWeatherData: todaysWeatherData)
-                            self.weatherDelegate?.updateUI(self, weatherData: todaysWeatherData)
-                        }catch{
-                            print("got error: \(error)")
-                        }
+                        let todaysWeatherData = fetchTodaysWeatherData(from: response.data)
+                        writeDataInRealm(todaysWeatherData: todaysWeatherData)
+                        self.weatherDelegate?.updateUI(self, weatherData: todaysWeatherData)
                     }
                 case .failure(let error):
                     print("we got an error \(error)")
@@ -58,21 +48,50 @@ struct ApiCallingStruct {
             }
         }else{
             if isWeeklyForcast{
-                if let realmClassNextSevenDaysWeatherData = localRealm.objects(RealmClassNextSevenDaysWeatherData.self).last,
-                   let nextSevenDaysWeatherData = createNextSevenDaysWeatherData(realmClassNextSevenDaysWeatherData: realmClassNextSevenDaysWeatherData){
-                    self.weatherDelegate?.updateUI(self, weatherData: nextSevenDaysWeatherData)
-                    //print(realmClassNextSevenDaysWeatherData)
-                }
+                let nextSevenDaysWeatherData = fetchNextSevenDaysWeatherData(from: nil)
+                self.weatherDelegate?.updateUI(self, weatherData: nextSevenDaysWeatherData)
             }else{
-                if let realmClassTodaysWeatherData = localRealm.objects(RealmClassTodaysWeatherData.self).last,
-                   let todaysWeatherData = createTodaysWeatherData(with: realmClassTodaysWeatherData) {
-                    self.weatherDelegate?.updateUI(self, weatherData: todaysWeatherData)
-                    //print(realmClassTodaysWeatherData)
-                }
+                let todaysWeatherData = fetchTodaysWeatherData(from: nil)
+                self.weatherDelegate?.updateUI(self, weatherData: todaysWeatherData)
             }
         }
         
     }
+    
+    func fetchTodaysWeatherData(from data: Data?) -> TodaysWeatherData {
+//        print(#function)
+        var todaysWeatherData: TodaysWeatherData?
+        if let data = data{
+            do{
+                todaysWeatherData = try JSONDecoder().decode(TodaysWeatherData.self, from: data)
+            }catch{
+                print("got error: \(error)")
+            }
+        }else{
+            if let realmClassTodaysWeatherData = localRealm.objects(RealmClassTodaysWeatherData.self).last{
+                todaysWeatherData = createTodaysWeatherData(with: realmClassTodaysWeatherData)
+            }
+        }
+        return todaysWeatherData!
+    }
+    
+    func fetchNextSevenDaysWeatherData(from data: Data?) -> NextSevenDaysWeatherData {
+//        print(#function)
+        var nextSevenDaysWeatherData:NextSevenDaysWeatherData?
+        if let data = data{
+            do{
+                nextSevenDaysWeatherData = try JSONDecoder().decode(NextSevenDaysWeatherData.self, from: data)
+            }catch{
+                print("got error: \(error)")
+            }
+        }else{
+            if let realmClassNextSevenDaysWeatherData = localRealm.objects(RealmClassNextSevenDaysWeatherData.self).last{
+              nextSevenDaysWeatherData = createNextSevenDaysWeatherData(realmClassNextSevenDaysWeatherData: realmClassNextSevenDaysWeatherData)
+            }
+        }
+        return nextSevenDaysWeatherData!
+    }
+    
     //MARK:- TodaysWeatherData back and forth RealmClassTodaysWeatherData
     func writeDataInRealm(todaysWeatherData:TodaysWeatherData){
         let task = createRealmClassTodaysWeatherData(with: todaysWeatherData)
