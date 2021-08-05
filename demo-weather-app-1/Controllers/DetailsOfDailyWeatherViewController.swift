@@ -47,5 +47,8 @@ class DetailsOfDailyWeatherViewController: UIViewController {
             humidityLabel.text = String(dailyWeather.humidity) + "%"
         }
     }
-
+    
+    deinit {
+        print("DetailsOfDailyWeatherViewController is deallocated")
+    }
 }

@@ -32,6 +32,9 @@ class SearchWeatherByCityViewController: UITableViewController {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+    deinit {
+        print("SearchWeatherByCityViewController is deallocated")
+    }
 }
 
 extension SearchWeatherByCityViewController: UISearchBarDelegate{
@@ -66,6 +69,10 @@ extension SearchWeatherByCityViewController{
         return cities?.count ?? 0
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50.0
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cityCellIdentifier, for: indexPath)
         cell.textLabel?.text = cities?[indexPath.row].name
@@ -73,14 +80,14 @@ extension SearchWeatherByCityViewController{
     }
 }
 
-
+//MARK:- Table view delegate
 extension SearchWeatherByCityViewController{
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.searchBar?.text = tableView.cellForRow(at: indexPath)?.textLabel?.text
         tableView.deselectRow(at: indexPath, animated: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { // Change `2.0` to the desired number of seconds.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             if let coordinate = self.cities?[indexPath.row].location?.coordinate{
-//                print("Coordinate of \(self.cities?[indexPath.row].name) is \(coordinate.latitude) and \(coordinate.longitude)")
+                print("Coordinate of \(self.cities?[indexPath.row].name) is \(coordinate.latitude) and \(coordinate.longitude)")
                 self.searchByCityDelegate?.setLatitudeLongitudeFromSearchWeatherByCityViewController(latitude: coordinate.latitude, longitude: coordinate.longitude)
             }
             self.navigationController?.popViewController(animated: false)

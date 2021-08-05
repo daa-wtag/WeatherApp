@@ -57,6 +57,9 @@ class TodaysWeatherViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
+    deinit {
+        print("TodaysWeatherViewController is deallocated")
+    }
 }
 
 //MARK:- CLLocationManagerDelegate
@@ -111,8 +114,6 @@ extension TodaysWeatherViewController: SearchWeatherByCityViewControllerDelegate
         if let lat = self.latitude , let lon = self.longitude{
 //            print("dhukse \(lat)  \(lon)")
             apiCallingStruct.callApi(latitude: lat, longitude: lon)
-        }else{
-//            print("dhukenai")
         }
     }
 }

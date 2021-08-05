@@ -26,6 +26,10 @@ class NextSevenDaysWeatherViewController: UIViewController {
             apiCallingStruct.callApi(latitude: lat, longitude: lon, isWeeklyForcast: true)
         }
     }
+    
+    deinit {
+        print("NextSevenDaysWeatherViewController is deallocated")
+    }
 }
 
 //MARK:- ApiCallingStructDelegate
