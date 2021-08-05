@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.4.3)
+  - MapboxGeocoder.swift (0.14.0)
   - Realm (10.11.0):
     - Realm/Headers (= 10.11.0)
   - Realm/Headers (10.11.0)
@@ -8,19 +9,22 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - MapboxGeocoder.swift (~> 0.14)
   - RealmSwift (~> 10.11.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - MapboxGeocoder.swift
     - Realm
     - RealmSwift
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  MapboxGeocoder.swift: a288e92ec13fbd65bbdfd7c54c61b0e80d19e734
   Realm: 39ff23f0f709cd4ed93eb47ee6593c2158945b38
   RealmSwift: 42713e09a8631070d6c12c3c5fb22b8edc1daa41
 
-PODFILE CHECKSUM: acf967224d987d0826c177102727f97cf6250a51
+PODFILE CHECKSUM: cf7247b9c0d9f6ed450e44a25b2a23dc672d10ef
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.2

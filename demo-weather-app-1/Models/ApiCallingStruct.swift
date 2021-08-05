@@ -10,7 +10,7 @@ import Alamofire
 import CoreLocation
 import RealmSwift
 
-protocol ApiCallingStructDelegate {
+protocol ApiCallingStructDelegate: AnyObject{
     func updateUI(_ apiCallingStruct: ApiCallingStruct, weatherData: Codable)
 }
 
@@ -19,7 +19,7 @@ struct ApiCallingStruct {
     private let currentWeatherPath = "\(Constants.openWeatherApiBaseUrl)/weather?units=metric&appid=\(Constants.API_KEY)"
     private let weeklyWeatherPath = "\(Constants.openWeatherApiBaseUrl)/onecall?units=metric&exclude=minutely,hourly,current&appid=\(Constants.API_KEY)"
     
-    var weatherDelegate: ApiCallingStructDelegate?
+    weak var weatherDelegate: ApiCallingStructDelegate?
     
     func callApi(latitude: CLLocationDegrees, longitude: CLLocationDegrees, isWeeklyForcast: Bool = false){
         let urlString: String
@@ -29,6 +29,8 @@ struct ApiCallingStruct {
         }else{
             urlString = currentWeatherPath + latitudeLongitude
         }
+        
+        print(urlString)
         if Connectivity.isConnectedToInternet {
             AF.request(urlString).response{ response in
                 switch response.result{
@@ -47,6 +49,7 @@ struct ApiCallingStruct {
                 }
             }
         }else{
+//            print("offline")
             if isWeeklyForcast{
                 let nextSevenDaysWeatherData = fetchNextSevenDaysWeatherData(from: nil)
                 self.weatherDelegate?.updateUI(self, weatherData: nextSevenDaysWeatherData)

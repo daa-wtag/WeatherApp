@@ -41,6 +41,12 @@ class TodaysWeatherViewController: UIViewController {
         navigationController?.pushViewController(nextSevenDaysWeatherVC, animated: true)
     }
     
+    @IBAction func searchWeatherByCityButtonPressed(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(identifier: Constants.searchWeatherByCityIdentifier) as! SearchWeatherByCityViewController
+        vc.searchByCityDelegate = self
+        navigationController?.pushViewController(vc, animated: false)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -72,7 +78,7 @@ extension TodaysWeatherViewController:CLLocationManagerDelegate{
 }
 
 //MARK:- ApiCallingStructDelegate
-extension TodaysWeatherViewController:ApiCallingStructDelegate{
+extension TodaysWeatherViewController: ApiCallingStructDelegate{
     func updateUI(_ apiCallingStruct: ApiCallingStruct,weatherData:Codable) {
         DispatchQueue.main.async {
             if let todaysWeatherData = weatherData as? TodaysWeatherData{
@@ -92,5 +98,21 @@ extension TodaysWeatherViewController:ApiCallingStructDelegate{
             
         }
         
+    }
+}
+
+
+//MARK:- Passing data to a back view controller
+extension TodaysWeatherViewController: SearchWeatherByCityViewControllerDelegate{
+    func setLatitudeLongitudeFromSearchWeatherByCityViewController(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+//        print(#function)
+        self.latitude = latitude
+        self.longitude = longitude
+        if let lat = self.latitude , let lon = self.longitude{
+//            print("dhukse \(lat)  \(lon)")
+            apiCallingStruct.callApi(latitude: lat, longitude: lon)
+        }else{
+//            print("dhukenai")
+        }
     }
 }

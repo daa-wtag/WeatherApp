@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1072017C17F0CF03EF0B380E /* libPods-demo-weather-app-1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF53B2F041C2CB50C898F251 /* libPods-demo-weather-app-1.a */; };
 		6F09BD56269D8AB000C4F619 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F09BD55269D8AB000C4F619 /* AppDelegate.swift */; };
 		6F09BD58269D8AB000C4F619 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F09BD57269D8AB000C4F619 /* SceneDelegate.swift */; };
 		6F09BD5A269D8AB000C4F619 /* TodaysWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F09BD59269D8AB000C4F619 /* TodaysWeatherViewController.swift */; };
@@ -42,9 +41,12 @@
 		6F39F00826B277F100610733 /* RealmClassCloudPercentage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F39F00726B277F100610733 /* RealmClassCloudPercentage.swift */; };
 		6F39F00B26B2791C00610733 /* RealmClassWindData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F39F00A26B2791C00610733 /* RealmClassWindData.swift */; };
 		6F409B4C26A429B500801691 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F409B4B26A429B400801691 /* Assets.xcassets */; };
+		6F8EE6BC26BABA99006703FD /* SearchWeatherByCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8EE6BB26BABA99006703FD /* SearchWeatherByCityViewController.swift */; };
+		9D978277D6B5344C9062568F /* Pods_demo_weather_app_1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2985E6E135CD60E188B88D72 /* Pods_demo_weather_app_1.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2985E6E135CD60E188B88D72 /* Pods_demo_weather_app_1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_demo_weather_app_1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F09BD52269D8AB000C4F619 /* demo-weather-app-1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "demo-weather-app-1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F09BD55269D8AB000C4F619 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F09BD57269D8AB000C4F619 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,9 +83,9 @@
 		6F39F00726B277F100610733 /* RealmClassCloudPercentage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmClassCloudPercentage.swift; sourceTree = "<group>"; };
 		6F39F00A26B2791C00610733 /* RealmClassWindData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmClassWindData.swift; sourceTree = "<group>"; };
 		6F409B4B26A429B400801691 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6F8EE6BB26BABA99006703FD /* SearchWeatherByCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWeatherByCityViewController.swift; sourceTree = "<group>"; };
 		8F7534809F41153E1F941FB3 /* Pods-demo-weather-app-1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo-weather-app-1.release.xcconfig"; path = "Target Support Files/Pods-demo-weather-app-1/Pods-demo-weather-app-1.release.xcconfig"; sourceTree = "<group>"; };
 		EC9BAB4222BEBD07249A96D3 /* Pods-demo-weather-app-1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo-weather-app-1.debug.xcconfig"; path = "Target Support Files/Pods-demo-weather-app-1/Pods-demo-weather-app-1.debug.xcconfig"; sourceTree = "<group>"; };
-		EF53B2F041C2CB50C898F251 /* libPods-demo-weather-app-1.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-demo-weather-app-1.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1072017C17F0CF03EF0B380E /* libPods-demo-weather-app-1.a in Frameworks */,
+				9D978277D6B5344C9062568F /* Pods_demo_weather_app_1.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +146,7 @@
 				6F37665A26B03F7700C07E71 /* DetailsOfDailyWeatherViewController.swift */,
 				6F36BBD626AE8AF400826CB3 /* NextSevenDaysWeatherViewController.swift */,
 				6F09BD59269D8AB000C4F619 /* TodaysWeatherViewController.swift */,
+				6F8EE6BB26BABA99006703FD /* SearchWeatherByCityViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -218,7 +221,7 @@
 		DA3B5803EC6428A697DEDE1E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EF53B2F041C2CB50C898F251 /* libPods-demo-weather-app-1.a */,
+				2985E6E135CD60E188B88D72 /* Pods_demo_weather_app_1.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				6F09BD4E269D8AB000C4F619 /* Sources */,
 				6F09BD4F269D8AB000C4F619 /* Frameworks */,
 				6F09BD50269D8AB000C4F619 /* Resources */,
+				1316CECBA1414CA79BF069A6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -290,6 +294,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1316CECBA1414CA79BF069A6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-demo-weather-app-1/Pods-demo-weather-app-1-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-demo-weather-app-1/Pods-demo-weather-app-1-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-demo-weather-app-1/Pods-demo-weather-app-1-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9CFC0E599F05BC2522835A0D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -327,6 +348,7 @@
 				6F36BBE326AE8FE800826CB3 /* WeatherDescription.swift in Sources */,
 				6F39F00526B274BC00610733 /* RealmClassSunriseSunsetdata.swift in Sources */,
 				6F39908626AD1EB100476883 /* WeeklyWeatherCell.swift in Sources */,
+				6F8EE6BC26BABA99006703FD /* SearchWeatherByCityViewController.swift in Sources */,
 				6F3045B226AEE53100FED247 /* CloudPercentage.swift in Sources */,
 				6F09BD73269DA74500C4F619 /* ApiCallingStruct.swift in Sources */,
 				6F36BBE026AE8FAA00826CB3 /* MainWeather.swift in Sources */,

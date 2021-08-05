@@ -35,9 +35,10 @@ struct Constants{
     static let weeklySegue = "weeklySegue"
     static let weeklyVcStoryBoardIdentifier = "weeklyVC"
     static let detailsOfDailyWeatherIdentifier = "detailsOfDailyWeather"
-    
+    static let searchWeatherByCityIdentifier = "searchWeatherByCityViewController"
     //MARK:- For weather cell
     static let weatherCellIdentifier = "weatherCell"
+    static let cityCellIdentifier = "cityCell"
     
     //MARK:- API
     static let API_KEY = "daf82517e9e888a45db619caeab87202"
