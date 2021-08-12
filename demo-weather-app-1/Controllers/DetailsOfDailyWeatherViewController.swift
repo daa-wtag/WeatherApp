@@ -49,6 +49,6 @@ class DetailsOfDailyWeatherViewController: UIViewController {
     }
     
     deinit {
-        print("DetailsOfDailyWeatherViewController is deallocated")
+        print("DetailsOfDailyWeatherViewController is deallocated -")
     }
 }
