@@ -28,7 +28,7 @@ class NextSevenDaysWeatherViewController: UIViewController {
     }
     
     deinit {
-        print("NextSevenDaysWeatherViewController is deallocated")
+        print(" NextSevenDaysWeatherViewController is deallocated")
     }
 }
 
