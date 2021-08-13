@@ -23,6 +23,7 @@ class TodaysWeatherViewController: UIViewController {
         locationManager.delegate = self
         locationManager.requestLocation()
         apiCallingObj.delegate = self
+        print("a")
     }
     
     @IBAction func weeklyButtonPressed(_ sender: UIButton) {
