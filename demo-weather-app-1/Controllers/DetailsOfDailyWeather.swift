@@ -26,6 +26,7 @@ class DetailsOfDailyWeatherViewController: UIViewController {
     var theDate:String?
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("-")
         
     }
 
