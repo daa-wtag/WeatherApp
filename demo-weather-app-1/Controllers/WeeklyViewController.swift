@@ -26,7 +26,7 @@ class WeeklyWeatherViewController: UIViewController {
     }
 }
 
-//MARK:- CLLocationManagerDelegate
+//MARK:- CLLocationManagerDelegat e
 extension WeeklyWeatherViewController:CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         manager.stopUpdatingLocation()
