@@ -2,7 +2,7 @@
 //  WeeklyViewController.swift
 //  demo-weather-app-1
 //
-//  Created by Abdullah Mohammad Daihan on 14/7/21.
+//  Created by  Abdullah Mohammad Daihan on 14/7/21.
 //
 
 import UIKit
