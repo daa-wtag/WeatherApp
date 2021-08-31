@@ -2,7 +2,7 @@
 //  DetailsOfDailyWeather.swift
 //  demo-weather-app-1
 //
-//  Created by Abdullah Mohammad Daihan on 27/7/21.
+//  Created by Abdullah M ohammad Daihan on 27/7/21.
 //
 
 import UIKit
