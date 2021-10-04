@@ -21,7 +21,7 @@ class NextSevenDaysWeatherViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         apiCallingStruct.weatherDelegate = self
-        
+        tableView.tableFooterView = UIView()
         if let lat = latitude , let lon = longitude{
             apiCallingStruct.callApi(latitude: lat, longitude: lon, isWeeklyForcast: true)
         }
